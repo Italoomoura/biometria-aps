@@ -30,51 +30,57 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 204, 0));
+        jLabel1.setFont(new java.awt.Font("Source Code Pro", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Escolha uma opção");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 630, -1));
+        jLabel1.setText("Escolha uma opção:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 260, 30));
 
-        jButton5.setBackground(new java.awt.Color(80, 192, 64));
+        jButton5.setBackground(new java.awt.Color(34, 94, 179));
+        jButton5.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Capturar");
+        jButton5.setText("CAPTURAR");
         jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 170, 160));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 125, 35));
 
-        jButton6.setBackground(new java.awt.Color(0, 51, 255));
+        jButton6.setBackground(new java.awt.Color(34, 94, 179));
+        jButton6.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Identificar");
+        jButton6.setText("IDENTIFICAR");
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 170, 160));
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 125, 35));
 
-        txt_title_menu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txt_title_menu.setBackground(new java.awt.Color(0, 0, 0));
+        txt_title_menu.setFont(new java.awt.Font("Source Code Pro", 1, 18)); // NOI18N
+        txt_title_menu.setForeground(new java.awt.Color(0, 0, 0));
         txt_title_menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt_title_menu.setText("Bem-vindo, user!");
-        jPanel1.add(txt_title_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 630, -1));
+        jPanel1.add(txt_title_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(648, 494));
+        setSize(new java.awt.Dimension(557, 141));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

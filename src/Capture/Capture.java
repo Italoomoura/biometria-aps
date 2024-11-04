@@ -77,68 +77,59 @@ public class Capture extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         label_photo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         counterLabel = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Capturar Fotos");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_photo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jPanel1.add(label_photo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 490, 380));
+        jPanel1.add(label_photo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 420));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 540, 490, 110));
 
-        counterLabel.setBackground(new java.awt.Color(77, 215, 109));
-        counterLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        counterLabel.setForeground(new java.awt.Color(255, 255, 255));
-        counterLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        counterLabel.setText("00");
-        counterLabel.setOpaque(true);
-        jPanel2.add(counterLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 90, 50));
-
-        saveButton.setBackground(new java.awt.Color(51, 51, 255));
-        saveButton.setForeground(new java.awt.Color(255, 255, 255));
-        saveButton.setText("Capturar");
-        saveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        saveButton.setOpaque(true);
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
-            }
-        });
-        jPanel2.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 130, 30));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 490, 110));
-
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton1.setText("Fechar");
+        jButton1.setBackground(new java.awt.Color(34, 94, 179));
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("FECHAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 390, 100, 30));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Capture 25 fotos");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 50));
+        counterLabel.setBackground(new java.awt.Color(34, 94, 179));
+        counterLabel.setFont(new java.awt.Font("Source Code Pro", 1, 24)); // NOI18N
+        counterLabel.setForeground(new java.awt.Color(255, 255, 255));
+        counterLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        counterLabel.setText("0/25");
+        counterLabel.setOpaque(true);
+        jPanel1.add(counterLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, 100, 32));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 50));
+        saveButton.setBackground(new java.awt.Color(34, 94, 179));
+        saveButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        saveButton.setForeground(new java.awt.Color(255, 255, 255));
+        saveButton.setText("CAPTURAR");
+        saveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 80, 100, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 600));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 430));
 
-        setSize(new java.awt.Dimension(548, 611));
+        setSize(new java.awt.Dimension(775, 469));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -188,10 +179,8 @@ public class Capture extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel counterLabel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel label_photo;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
@@ -228,7 +217,7 @@ public class Capture extends javax.swing.JFrame {
                                         String cropped = "C:\\photos\\person." + idPerson + "." + sample + ".jpg";
                                         imwrite(cropped, face);
 
-                                        counterLabel.setText(String.valueOf(sample));
+                                        counterLabel.setText(String.valueOf(sample) + "/25");
                                         sample++;
                                     }
                                     if( sample > 25 ){

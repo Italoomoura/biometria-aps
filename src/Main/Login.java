@@ -24,15 +24,21 @@ public class Login extends javax.swing.JFrame {
         setTitle("Login");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 252));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Source Code Pro", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Senha:");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Source Code Pro", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Usuário:");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
+        txt_user.setBackground(new java.awt.Color(34, 94, 179));
+        txt_user.setForeground(new java.awt.Color(255, 255, 255));
         txt_user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_userActionPerformed(evt);
@@ -40,23 +46,28 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel2.add(txt_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 280, 30));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Source Code Pro", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Login");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
+
+        txt_pass.setBackground(new java.awt.Color(34, 94, 179));
+        txt_pass.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.add(txt_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 280, 30));
 
-        jButton1.setBackground(new java.awt.Color(80, 192, 64));
+        jButton1.setBackground(new java.awt.Color(34, 94, 179));
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Entrar");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setLabel("ENTRAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 100, 30));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 310));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 280));
 
         setSize(new java.awt.Dimension(335, 317));
         setLocationRelativeTo(null);

@@ -68,7 +68,6 @@ public class Recognizer extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         label_office = new javax.swing.JLabel();
         label_name = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -80,44 +79,43 @@ public class Recognizer extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_photo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jPanel1.add(label_photo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 490, 380));
+        jPanel1.add(label_photo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 490, 380));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        label_office.setBackground(new java.awt.Color(77, 215, 109));
-        label_office.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        label_office.setBackground(new java.awt.Color(34, 94, 179));
+        label_office.setFont(new java.awt.Font("Source Code Pro", 1, 16)); // NOI18N
         label_office.setForeground(new java.awt.Color(255, 255, 255));
         label_office.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_office.setText("Cargo");
         label_office.setOpaque(true);
         jPanel2.add(label_office, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 490, 30));
 
-        label_name.setBackground(new java.awt.Color(77, 215, 109));
-        label_name.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        label_name.setBackground(new java.awt.Color(34, 94, 179));
+        label_name.setFont(new java.awt.Font("Source Code Pro", 1, 16)); // NOI18N
         label_name.setForeground(new java.awt.Color(255, 255, 255));
         label_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_name.setText("Nome - Sobrenome");
         label_name.setOpaque(true);
         jPanel2.add(label_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 490, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 490, 90));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 490, 90));
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton1.setText("Fechar");
+        jButton1.setBackground(new java.awt.Color(34, 94, 179));
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("FECHAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, -1, -1));
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 50));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 520, 100, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 580));
 
-        setSize(new java.awt.Dimension(532, 587));
+        setSize(new java.awt.Dimension(528, 558));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -164,7 +162,6 @@ public class Recognizer extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel label_name;
     private javax.swing.JLabel label_office;
     private javax.swing.JLabel label_photo;
