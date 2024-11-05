@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import org.bytedeco.javacpp.BytePointer;
 import org.bytedeco.javacpp.DoublePointer;
@@ -34,6 +35,11 @@ import org.bytedeco.opencv.opencv_videoio.VideoCapture;
 public class Recognizer extends javax.swing.JFrame {
 
     private Recognizer.DaemonThread myThread = null;
+    
+    private int consecutiveRecognitionTime = 0;
+    private final int REQUIRED_RECOGNITION_TIME = 5;
+    
+    private boolean isRecognitionComplete = false;
     
     //JavaCV
     VideoCapture webSource = null;
@@ -195,16 +201,20 @@ public class Recognizer extends javax.swing.JFrame {
                                 DoublePointer confidence = new DoublePointer(1);
                                 recognizer.predict(faceCapturada, rotulo, confidence);
                                 int prediction = rotulo.get(0);
-                                String name = null;
-                                if(prediction == -1){
-                                    label_name.setText("Desconhecido");
-                                    label_office.setText("");
-                                    idPerson = 0;
-                                }
-                                else {
-                                    System.out.println(confidence.get(0));
+                                
+                                if (prediction != -1) {
                                     idPerson = prediction;
-                                    rec();
+                                    consecutiveRecognitionTime++;
+
+                                    if (consecutiveRecognitionTime >= REQUIRED_RECOGNITION_TIME && !isRecognitionComplete) {
+                                        rec();
+                                        OpenDados(); 
+                                        isRecognitionComplete = true; 
+                                        consecutiveRecognitionTime = 0;
+                                        stopCamera(); 
+                                    }
+                                } else {
+                                    consecutiveRecognitionTime = 0;
                                 }
                                 
                                 
@@ -228,6 +238,43 @@ public class Recognizer extends javax.swing.JFrame {
                 }
             }
         }
+    }
+    
+    private void OpenDados() {
+        SwingWorker<Void, Void> worker = new SwingWorker<>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                connect.conectar();
+                String cargo = "";
+                String nomeCompleto = "";
+
+                try {
+                    String SQL = "SELECT * FROM person WHERE id = " + String.valueOf(idPerson);
+                    connect.executaSQL(SQL);
+
+                    if (connect.rs.next()) {
+                        nomeCompleto = connect.rs.getString("first_name") + " " + connect.rs.getString("last_name");
+                        cargo = connect.rs.getString("office");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    connect.desconectar();
+                }
+
+                
+                final String finalNomeCompleto = nomeCompleto;
+                final String finalCargo = cargo;
+
+                SwingUtilities.invokeLater(() -> {
+                    InfoWindow infoWindow = new InfoWindow(finalNomeCompleto, finalCargo);
+                    infoWindow.setVisible(true);
+                });
+
+                return null;
+            }
+        };
+        worker.execute();
     }
     
     private void rec() {

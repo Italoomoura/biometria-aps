@@ -23,8 +23,8 @@ public class RegisterPerson extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txt_last_name = new javax.swing.JTextField();
         txt_first_name = new javax.swing.JTextField();
-        txt_office = new javax.swing.JTextField();
         txt_nasc_date = new javax.swing.JFormattedTextField();
+        txt_office = new javax.swing.JComboBox<>();
         txt_id_label = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
@@ -39,22 +39,18 @@ public class RegisterPerson extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Source Code Pro", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Sobrenome:");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Source Code Pro", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Data de nascimento:");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Source Code Pro", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Cargo:");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Source Code Pro", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Nome:");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
@@ -71,10 +67,6 @@ public class RegisterPerson extends javax.swing.JFrame {
         txt_first_name.setForeground(new java.awt.Color(255, 255, 255));
         jPanel3.add(txt_first_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 200, 25));
 
-        txt_office.setBackground(new java.awt.Color(34, 94, 179));
-        txt_office.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel3.add(txt_office, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 200, 25));
-
         txt_nasc_date.setBackground(new java.awt.Color(34, 94, 179));
         txt_nasc_date.setForeground(new java.awt.Color(255, 255, 255));
         try {
@@ -89,10 +81,17 @@ public class RegisterPerson extends javax.swing.JFrame {
         });
         jPanel3.add(txt_nasc_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 200, 25));
 
+        txt_office.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nível 1", "Nível 2", "Nível 3" }));
+        txt_office.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_officeActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txt_office, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 200, 20));
+
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 450, 150));
 
         txt_id_label.setFont(new java.awt.Font("Source Code Pro", 0, 24)); // NOI18N
-        txt_id_label.setForeground(new java.awt.Color(0, 0, 0));
         txt_id_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt_id_label.setText("1");
         jPanel1.add(txt_id_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, -1));
@@ -117,7 +116,7 @@ public class RegisterPerson extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String fName = txt_first_name.getText();
         String lName = txt_last_name.getText();
-        String office = txt_office.getText();
+        String office = (String) txt_office.getSelectedItem();
         String nDate = txt_nasc_date.getText();
         int id = Integer.parseInt(txt_id_label.getText().replace("ID: ", ""));
         
@@ -132,6 +131,10 @@ public class RegisterPerson extends javax.swing.JFrame {
     private void txt_last_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_last_nameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_last_nameActionPerformed
+
+    private void txt_officeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_officeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_officeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,7 +183,7 @@ public class RegisterPerson extends javax.swing.JFrame {
     private javax.swing.JLabel txt_id_label;
     private javax.swing.JTextField txt_last_name;
     private javax.swing.JFormattedTextField txt_nasc_date;
-    private javax.swing.JTextField txt_office;
+    private javax.swing.JComboBox<String> txt_office;
     // End of variables declaration//GEN-END:variables
     
     private void showIdUser() {

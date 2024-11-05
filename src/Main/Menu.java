@@ -5,13 +5,9 @@ import Recognizer.Recognizer;
 
 public class Menu extends javax.swing.JFrame {
 
-    public Menu(String user) {
+    public Menu() {
         initComponents();
-        txt_title_menu.setText("Bem-Vindo, " + user);
-    }
-
-    private Menu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        txt_title_menu.setText("Bem-Vindo");
     }
 
     @SuppressWarnings("unchecked")
