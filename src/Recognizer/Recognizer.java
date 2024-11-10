@@ -110,7 +110,6 @@ public class Recognizer extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(34, 94, 179));
         jButton1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("FECHAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,64 +188,69 @@ public class Recognizer extends javax.swing.JFrame {
                             cvtColor(cameraImage, imageGray, COLOR_BGRA2GRAY);
 
                             RectVector detectedFaces = new RectVector();
-                            cascade.detectMultiScale(imageGray, detectedFaces, 1.1, 2, 0, new Size(150, 150), new Size(500, 500));
+                            // Ajuste de parâmetros para detectar faces com mais precisão
+                            cascade.detectMultiScale(imageGray, detectedFaces, 1.2, 10, 0, new Size(30, 30), new Size(500, 500));
 
-                            for(int i = 0; i < detectedFaces.size(); i++){
+
+                            for (int i = 0; i < detectedFaces.size(); i++) {
                                 Rect dadosFace = detectedFaces.get(i);
                                 rectangle(cameraImage, dadosFace, new Scalar(0, 255, 0, 0));
                                 Mat faceCapturada = new Mat(imageGray, dadosFace);
                                 opencv_imgproc.resize(faceCapturada, faceCapturada, new Size(160, 160));
-                                
+
                                 IntPointer rotulo = new IntPointer(1);
                                 DoublePointer confidence = new DoublePointer(1);
                                 recognizer.predict(faceCapturada, rotulo, confidence);
                                 int prediction = rotulo.get(0);
-                                
+
+                                // Ajuste do critério de confiança para evitar falsos positivos
+                                if (confidence.get(0) < 50.0) {
+                                    prediction = -1;
+                                }
+
                                 if (prediction != -1) {
                                     idPerson = prediction;
                                     consecutiveRecognitionTime++;
 
                                     if (consecutiveRecognitionTime >= REQUIRED_RECOGNITION_TIME && !isRecognitionComplete) {
                                         rec();
-                                        OpenDados(); 
-                                        isRecognitionComplete = true; 
+                                        OpenDados();
+                                        isRecognitionComplete = true;
                                         consecutiveRecognitionTime = 0;
-                                        stopCamera(); 
+                                        stopCamera();
                                     }
                                 } else {
                                     consecutiveRecognitionTime = 0;
                                 }
-                                
-                                
                             }
 
                             imencode(".bmp", cameraImage, mem);
                             Image im = ImageIO.read(new ByteArrayInputStream(mem.getStringBytes()));
                             BufferedImage buff = (BufferedImage) im;
 
-                            if(g.drawImage(buff, 0, 0, getWidth(), getHeight() - 100, 0, 0, buff.getWidth(), buff.getHeight(), null)){
-                                if (runnable == false){
+                            if (g.drawImage(buff, 0, 0, getWidth(), getHeight() - 100, 0, 0, buff.getWidth(), buff.getHeight(), null)) {
+                                if (!runnable) {
                                     System.out.println("Salve Foto");
                                     this.wait();
                                 }
                             }
                         }
-
-                    } catch (IOException | InterruptedException ex){
-
+                    } catch (IOException | InterruptedException ex) {
+                        System.err.println("Erro ao processar imagem ou thread interrompida: " + ex.getMessage());
                     }
                 }
             }
         }
     }
+
     
     private void OpenDados() {
         SwingWorker<Void, Void> worker = new SwingWorker<>() {
             @Override
             protected Void doInBackground() throws Exception {
                 connect.conectar();
-                String cargo = "";
-                String nomeCompleto = "";
+                String cargo = "Nível 1";
+                String nomeCompleto = "Desconhecido";
 
                 try {
                     String SQL = "SELECT * FROM person WHERE id = " + String.valueOf(idPerson);
@@ -257,7 +261,7 @@ public class Recognizer extends javax.swing.JFrame {
                         cargo = connect.rs.getString("office");
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    
                 } finally {
                     connect.desconectar();
                 }

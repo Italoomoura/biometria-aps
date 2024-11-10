@@ -49,7 +49,7 @@ public class Capture extends javax.swing.JFrame {
     
     //Vars
     String root, firstNamePerson, lastNamePerson, officePerson, nascDatePerson;
-    int numSamples = 25, sample = 1, idPerson;
+    int numSamples = 100, sample = 1, idPerson;
     
     //Utils
     ConnectDB connect = new ConnectDB();
@@ -98,7 +98,6 @@ public class Capture extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(34, 94, 179));
         jButton1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("FECHAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,13 +110,12 @@ public class Capture extends javax.swing.JFrame {
         counterLabel.setFont(new java.awt.Font("Source Code Pro", 1, 24)); // NOI18N
         counterLabel.setForeground(new java.awt.Color(255, 255, 255));
         counterLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        counterLabel.setText("0/25");
+        counterLabel.setText("0/100");
         counterLabel.setOpaque(true);
         jPanel1.add(counterLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, 100, 32));
 
         saveButton.setBackground(new java.awt.Color(34, 94, 179));
         saveButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        saveButton.setForeground(new java.awt.Color(255, 255, 255));
         saveButton.setText("CAPTURAR");
         saveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         saveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -213,14 +211,15 @@ public class Capture extends javax.swing.JFrame {
 
                                 if(saveButton.getModel().isPressed()) {
 
-                                    if (sample <= numSamples){
+                                    for(sample=0; sample <= numSamples; sample++){
                                         String cropped = "C:\\photos\\person." + idPerson + "." + sample + ".jpg";
                                         imwrite(cropped, face);
 
-                                        counterLabel.setText(String.valueOf(sample) + "/25");
-                                        sample++;
+                                        counterLabel.setText(String.valueOf(sample) + "/100");
+                                        
+                                        Thread.sleep(10);
                                     }
-                                    if( sample > 25 ){
+                                    if( sample > 100 ){
                                         generate();
                                         insertDB();
                                         System.out.println("Arquivo Gerado");

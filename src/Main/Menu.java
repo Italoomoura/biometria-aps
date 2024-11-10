@@ -27,14 +27,12 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Source Code Pro", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Escolha uma opção:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 260, 30));
 
         jButton5.setBackground(new java.awt.Color(34, 94, 179));
         jButton5.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("CAPTURAR");
         jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -46,7 +44,6 @@ public class Menu extends javax.swing.JFrame {
 
         jButton6.setBackground(new java.awt.Color(34, 94, 179));
         jButton6.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("IDENTIFICAR");
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -58,7 +55,6 @@ public class Menu extends javax.swing.JFrame {
 
         txt_title_menu.setBackground(new java.awt.Color(0, 0, 0));
         txt_title_menu.setFont(new java.awt.Font("Source Code Pro", 1, 18)); // NOI18N
-        txt_title_menu.setForeground(new java.awt.Color(0, 0, 0));
         txt_title_menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt_title_menu.setText("Bem-vindo, user!");
         jPanel1.add(txt_title_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));

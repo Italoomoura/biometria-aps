@@ -101,20 +101,21 @@ public class InfoWindow extends javax.swing.JFrame {
 
     private void mostrarInformacoes(String cargo) {
         StringBuilder informacoes = new StringBuilder();
+        String n1 = "Informações Nível 1: Acesso geral para todos:\nAmazonia está pegando fogo!\nCuidado com as queimas e onças queimadas\n", n2 = "Informações Nível 2: Acesso restrito a diretores de divisões:\nMadeiras sendo vendidas em Cuba\nÁgua com resíduos toxicos\n\n", n3="Informações Nível 3: Acesso total aos dados estratégicos:\nReunião com o ministro do meio ambiente de Cuba\nQueimadas são Fake\n\n";
         
         switch (cargo) {
             case "Nível 3":
-                informacoes.append("Informações Nível 3: Acesso total aos dados estratégicos.\n");
-                informacoes.append("Informações Nível 2: Acesso restrito a diretores de divisões.\n");
-                informacoes.append("Informações Nível 1: Acesso geral para todos.\n");
+                informacoes.append(n3);
+                informacoes.append(n2);
+                informacoes.append(n1);
                 break;
             case "Nível 2":
-                informacoes.append("Informações Nível 2: Acesso restrito a diretores de divisões.\n");
-                informacoes.append("Informações Nível 1: Acesso geral para todos.\n");
+                informacoes.append(n2);
+                informacoes.append(n1);
                 break;
             case "Nível 1":
             default:
-                informacoes.append("Informações Nível 1: Acesso geral para todos.\n");
+                informacoes.append(n1);
                 break;
         }
 
