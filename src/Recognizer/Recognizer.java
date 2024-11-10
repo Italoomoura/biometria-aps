@@ -75,6 +75,12 @@ public class Recognizer extends javax.swing.JFrame {
         label_office = new javax.swing.JLabel();
         label_name = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        label_photo1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        label_office1 = new javax.swing.JLabel();
+        label_name1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Identificar Pessoa");
@@ -118,6 +124,45 @@ public class Recognizer extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 520, 100, 30));
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_photo1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jPanel3.add(label_photo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 490, 380));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_office1.setBackground(new java.awt.Color(34, 94, 179));
+        label_office1.setFont(new java.awt.Font("Source Code Pro", 1, 16)); // NOI18N
+        label_office1.setForeground(new java.awt.Color(255, 255, 255));
+        label_office1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_office1.setText("Cargo");
+        label_office1.setOpaque(true);
+        jPanel4.add(label_office1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 490, 30));
+
+        label_name1.setBackground(new java.awt.Color(34, 94, 179));
+        label_name1.setFont(new java.awt.Font("Source Code Pro", 1, 16)); // NOI18N
+        label_name1.setForeground(new java.awt.Color(255, 255, 255));
+        label_name1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_name1.setText("Nome - Sobrenome");
+        label_name1.setOpaque(true);
+        jPanel4.add(label_name1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 490, 30));
+
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 490, 90));
+
+        jButton2.setBackground(new java.awt.Color(34, 94, 179));
+        jButton2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jButton2.setText("FECHAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 520, 100, 30));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 580));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 580));
 
         setSize(new java.awt.Dimension(528, 558));
@@ -127,6 +172,10 @@ public class Recognizer extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         stopCamera();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,11 +214,17 @@ public class Recognizer extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel label_name;
+    private javax.swing.JLabel label_name1;
     private javax.swing.JLabel label_office;
+    private javax.swing.JLabel label_office1;
     private javax.swing.JLabel label_photo;
+    private javax.swing.JLabel label_photo1;
     // End of variables declaration//GEN-END:variables
     
     class DaemonThread implements Runnable {
@@ -188,8 +243,8 @@ public class Recognizer extends javax.swing.JFrame {
                             cvtColor(cameraImage, imageGray, COLOR_BGRA2GRAY);
 
                             RectVector detectedFaces = new RectVector();
-                            // Ajuste de parâmetros para detectar faces com mais precisão
-                            cascade.detectMultiScale(imageGray, detectedFaces, 1.2, 10, 0, new Size(30, 30), new Size(500, 500));
+                            
+                            cascade.detectMultiScale(imageGray, detectedFaces, 1.3, 7, 0, new Size(150, 150), new Size(500, 500));
 
 
                             for (int i = 0; i < detectedFaces.size(); i++) {
@@ -202,9 +257,10 @@ public class Recognizer extends javax.swing.JFrame {
                                 DoublePointer confidence = new DoublePointer(1);
                                 recognizer.predict(faceCapturada, rotulo, confidence);
                                 int prediction = rotulo.get(0);
+                                
 
-                                // Ajuste do critério de confiança para evitar falsos positivos
-                                if (confidence.get(0) < 50.0) {
+                                
+                                if (confidence.get(0) < 65.0) {
                                     prediction = -1;
                                 }
 
@@ -213,7 +269,6 @@ public class Recognizer extends javax.swing.JFrame {
                                     consecutiveRecognitionTime++;
 
                                     if (consecutiveRecognitionTime >= REQUIRED_RECOGNITION_TIME && !isRecognitionComplete) {
-                                        rec();
                                         OpenDados();
                                         isRecognitionComplete = true;
                                         consecutiveRecognitionTime = 0;

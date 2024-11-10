@@ -1,17 +1,32 @@
 
 package Recognizer;
 
+import Util.ConnectDB;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 
 public class InfoWindow extends javax.swing.JFrame {
 
 
+    private ConnectDB connectDB;
+    private String cargo;
+    
+    
     public InfoWindow(String nomeCompleto, String cargo) {
         initComponents();
+
+        connectDB = new ConnectDB();
+        connectDB.conectar();
+
+        this.cargo = cargo;
         
         labelNome.setText("Nome: " + nomeCompleto);
         labelCargo.setText("Cargo: " + cargo);
-        
-        mostrarInformacoes(cargo);
+
+        mostrarNoticias();
+        configurarBotoes();
     }
 
     /**
@@ -26,7 +41,10 @@ public class InfoWindow extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         labelNome = new javax.swing.JLabel();
         labelCargo = new javax.swing.JLabel();
-        labelInformacoes = new javax.swing.JLabel();
+        labelNoticias = new javax.swing.JLabel();
+        btnAdicionar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnDeletar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dados");
@@ -34,13 +52,37 @@ public class InfoWindow extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelNome.setText("Nome:");
-        jPanel1.add(labelNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        jPanel1.add(labelNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         labelCargo.setText("Cargo:");
-        jPanel1.add(labelCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+        jPanel1.add(labelCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
-        labelInformacoes.setText("Informações:");
-        jPanel1.add(labelInformacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        labelNoticias.setText("Notícias:");
+        jPanel1.add(labelNoticias, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+
+        btnAdicionar.setText("Adicionar Notícia");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+
+        btnEditar.setText("Editar Notícia");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, -1, -1));
+
+        btnDeletar.setText("Deletar Notícia");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -56,6 +98,18 @@ public class InfoWindow extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(416, 308));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        adicionarNoticia();
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        editarNoticia();
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        deletarNoticia();
+    }//GEN-LAST:event_btnDeletarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -93,34 +147,60 @@ public class InfoWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnDeletar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelCargo;
-    private javax.swing.JLabel labelInformacoes;
     private javax.swing.JLabel labelNome;
+    private javax.swing.JLabel labelNoticias;
     // End of variables declaration//GEN-END:variables
 
-    private void mostrarInformacoes(String cargo) {
-        StringBuilder informacoes = new StringBuilder();
-        String n1 = "Informações Nível 1: Acesso geral para todos:\nAmazonia está pegando fogo!\nCuidado com as queimas e onças queimadas\n", n2 = "Informações Nível 2: Acesso restrito a diretores de divisões:\nMadeiras sendo vendidas em Cuba\nÁgua com resíduos toxicos\n\n", n3="Informações Nível 3: Acesso total aos dados estratégicos:\nReunião com o ministro do meio ambiente de Cuba\nQueimadas são Fake\n\n";
-        
-        switch (cargo) {
-            case "Nível 3":
-                informacoes.append(n3);
-                informacoes.append(n2);
-                informacoes.append(n1);
-                break;
-            case "Nível 2":
-                informacoes.append(n2);
-                informacoes.append(n1);
-                break;
-            case "Nível 1":
-            default:
-                informacoes.append(n1);
-                break;
-        }
+    private void mostrarNoticias() {
+        try {
+            ResultSet rs = connectDB.readNoticias();
+            StringBuilder noticias = new StringBuilder("<html>Noticias:<br/>");
 
-        // Atualiza o JLabel com as informações
-        labelInformacoes.setText("<html>" + informacoes.toString().replaceAll("\n", "<br/>") + "</html>");
+            while (rs.next()) {
+                noticias.append(rs.getString("titulo")).append(": ").append(rs.getString("conteudo")).append("<br/>");
+            }
+            noticias.append("</html>");
+            labelNoticias.setText(noticias.toString());
+        } catch (SQLException e) {
+            System.out.println("Erro ao exibir noticias: " + e);
+        }
+    }
+    
+    private void configurarBotoes() {
+        // Controle de visibilidade dos botões com base no nível do cargo
+        btnAdicionar.setVisible(cargo.equals("Nível 2") || cargo.equals("Nível 3"));
+        btnEditar.setVisible(cargo.equals("Nível 3"));
+        btnDeletar.setVisible(cargo.equals("Nível 3"));
+    }
+    
+    private void adicionarNoticia() {
+        String titulo = JOptionPane.showInputDialog(this, "Título da notícia:");
+        String conteudo = JOptionPane.showInputDialog(this, "Conteúdo da notícia:");
+        if (titulo != null && conteudo != null && !titulo.isEmpty() && !conteudo.isEmpty()) {
+            connectDB.createNoticia(titulo, conteudo);
+            mostrarNoticias();
+        }
+    }
+
+    private void editarNoticia() {
+        int id = Integer.parseInt(JOptionPane.showInputDialog(this, "ID da notícia a ser editada:"));
+        String titulo = JOptionPane.showInputDialog(this, "Novo título da notícia:");
+        String conteudo = JOptionPane.showInputDialog(this, "Novo conteúdo da notícia:");
+        if (titulo != null && conteudo != null && !titulo.isEmpty() && !conteudo.isEmpty()) {
+            connectDB.updateNoticia(id, titulo, conteudo);
+            mostrarNoticias();
+        }
+    }
+
+    private void deletarNoticia() {
+        int id = Integer.parseInt(JOptionPane.showInputDialog(this, "ID da notícia a ser deletada:"));
+        connectDB.deleteNoticia(id);
+        mostrarNoticias();
     }
 
 }

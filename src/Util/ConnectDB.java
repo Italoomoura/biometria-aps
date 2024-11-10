@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
 
 public class ConnectDB {
     
@@ -47,6 +48,53 @@ public class ConnectDB {
             rs = stm.executeQuery(SQL);
         } catch (SQLException e) {
             System.out.println("Erro ao executar SQL: " + e);
+        }
+    }
+    
+    public ResultSet readNoticias() {
+        try {
+            String SQL = "SELECT * FROM noticias";
+            PreparedStatement ps = conn.prepareStatement(SQL);
+            return ps.executeQuery();
+        } catch (SQLException e) {
+            System.out.println("Erro ao ler noticias: " + e);
+            return null;
+        }
+    }
+
+    public void createNoticia(String titulo, String conteudo) {
+        try {
+            String SQL = "INSERT INTO noticias (titulo, conteudo) VALUES (?, ?)";
+            PreparedStatement ps = conn.prepareStatement(SQL);
+            ps.setString(1, titulo);
+            ps.setString(2, conteudo);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erro ao criar noticia: " + e);
+        }
+    }
+
+    public void updateNoticia(int id, String titulo, String conteudo) {
+        try {
+            String SQL = "UPDATE noticias SET titulo = ?, conteudo = ? WHERE id = ?";
+            PreparedStatement ps = conn.prepareStatement(SQL);
+            ps.setString(1, titulo);
+            ps.setString(2, conteudo);
+            ps.setInt(3, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar noticia: " + e);
+        }
+    }
+
+    public void deleteNoticia(int id) {
+        try {
+            String SQL = "DELETE FROM noticias WHERE id = ?";
+            PreparedStatement ps = conn.prepareStatement(SQL);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erro ao deletar noticia: " + e);
         }
     }
 }
