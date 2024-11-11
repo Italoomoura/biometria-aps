@@ -23,3 +23,5 @@
 hs_err_pid*
 replay_pid*
 /build/
+/javacv-bin
+/javamysql-connector-j-9.0.0
