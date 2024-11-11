@@ -58,7 +58,7 @@ public class InfoWindow extends javax.swing.JFrame {
         jPanel1.add(labelCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         labelNoticias.setText("Notícias:");
-        jPanel1.add(labelNoticias, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        jPanel1.add(labelNoticias, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 360, -1));
 
         btnAdicionar.setText("Adicionar Notícia");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +162,11 @@ public class InfoWindow extends javax.swing.JFrame {
             StringBuilder noticias = new StringBuilder("<html>Noticias:<br/>");
 
             while (rs.next()) {
-                noticias.append(rs.getString("titulo")).append(": ").append(rs.getString("conteudo")).append("<br/>");
+                noticias.append("-----------------------------------<br/>");
+                noticias.append("ID: ").append(rs.getString("id")).append("<br/>");
+                noticias.append(
+                        rs.getString("titulo")).append(": <br/>").append(rs.getString("conteudo")).append("<br/><br/>"
+                        );
             }
             noticias.append("</html>");
             labelNoticias.setText(noticias.toString());

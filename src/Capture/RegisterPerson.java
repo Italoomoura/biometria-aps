@@ -94,7 +94,7 @@ public class RegisterPerson extends javax.swing.JFrame {
         txt_id_label.setFont(new java.awt.Font("Source Code Pro", 0, 24)); // NOI18N
         txt_id_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt_id_label.setText("1");
-        jPanel1.add(txt_id_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, -1));
+        jPanel1.add(txt_id_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, -1));
 
         jButton1.setBackground(new java.awt.Color(34, 94, 179));
         jButton1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
